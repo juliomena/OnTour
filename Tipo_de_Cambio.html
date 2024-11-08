@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tipo de Cambio</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="icon" href="images/Logo.jpg">
+    <link rel="stylesheet" href="assets/css/Modal.css">
+    <link rel="stylesheet" href="assets/css/Style.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+    	
+    
+</head>
+<body style="background-color: rgb(190, 193, 196);">
+
+      <!-- Menu de inicio -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="Index.html"><img src="images/Logo.jpg" alt="Logo" width="70px"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="Somos.html">¿Quiénes somos?<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="NuestrosServicios.html">Nuestros Servicios</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="Contacto.html">Contáctanos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="Clima.html">Consulta el Clima</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="expcustomer.html">Experiencias de clientes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="Tipo_de_Cambio.html">Tipo de Cambio</a>
+          </li>             
+        </ul>
+      </div>
+    </nav>     
+  
+    <!-- Tipo de Cambio -->
+    <div class="container mt-5">
+        <h1>Tipo de Cambio</h1><br>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Moneda</th>
+                    <th scope="col">Indicador</th>
+                    <th scope="col">Valor</th>
+                </tr>
+            </thead>
+            <tbody id="indicators-body">
+              
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> -->
+
+
+    <!-- API CON CLIMA DE PUNTARENAS -->
+    <script>
+        $(document).ready(function() {
+            $.getJSON('https://mindicador.cl/api', function(data) {
+                var indicators = data;
+                var indicatorsTable = $('#indicators-body');
+                $.each(indicators, function(key, value) {
+                    if(typeof value === 'object') {
+                        var indicatorRow = $('<tr>');
+                        if (value.codigo == 'dolar' || value.codigo == 'dolar_intercambio' || value.codigo == 'euro') {
+                            $('<td>').text(value.codigo).appendTo(indicatorRow);
+                            $('<td>').text(value.nombre).appendTo(indicatorRow);
+                            $('<td>').text(value.valor).appendTo(indicatorRow);
+                            indicatorsTable.append(indicatorRow);
+                          }
+                    }
+                });
+            }).fail(function() {
+                console.log('Error al consumir la API!');
+            });
+        });
+        
+    </script>       
+    
+    <div class="container p-4 pb-0">
+      <div class="footer-menu-container">
+        <a href="https://facebook.com/" class="social-icon"><i class="bi bi-facebook"></i></a>
+        <a href="https://www.instagram.com/" class="social-icon"><i class="bi bi-instagram"></i></a>
+        <a href="https://twitter.com/" class="social-icon"><i class="bi bi-twitter-x"></i></a>   
+      </div>
+      </div>
+
+    <ul class="footer-menu-container">
+      <a href="Somos.html">
+      <li class="menu-item">Nosotros</li>
+      </a>
+      <a href="NuestrosServicios.html">
+      <li class="menu-item">Servicios</li>
+      </a>
+      <a href="Contacto.html">
+      <li class="menu-item">Contacto</li>
+      </a>
+    </ul>
+  
+  
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
+      &copy;2024, JC&FC productions. All rights
+      <a class="text-body" href="Index.html">PaseoFeliz.cl</a>
+    </div>    
+</body>
+</html>
